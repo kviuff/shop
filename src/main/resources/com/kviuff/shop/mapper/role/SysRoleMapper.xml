@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kviuff.shop.mapper.role.SysRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.kviuff.shop.common.entity.SysRolePo">
+        <result column="role_code" property="userCode"/>
+        <result column="role_name" property="loginCode"/>
+        <result column="role_sort" property="userName"/>
+        <result column="is_sys" property="password"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+
+</mapper>

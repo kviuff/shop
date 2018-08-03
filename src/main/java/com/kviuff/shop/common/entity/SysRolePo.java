@@ -1,0 +1,43 @@
+package com.kviuff.shop.common.entity;
+
+import com.kviuff.shop.common.entity.base.BasePo;
+import lombok.Data;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * 系统角色
+ * @author kanglan
+ * @date 2018/08/02
+ */
+@Table(name = "sys_role")
+@Data
+public class SysRolePo extends BasePo {
+
+    /**
+     * 主键
+     */
+    @Id
+    private String roleCode;
+
+    /**
+     * 角色名称
+     */
+    private String roleName;
+
+    /**
+     * 排序
+     */
+    private Integer roleSort;
+
+    /**
+     * 是否系统内置
+     */
+    private String isSys;
+
+    /**
+     * 备注
+     */
+    private String remarks;
+}

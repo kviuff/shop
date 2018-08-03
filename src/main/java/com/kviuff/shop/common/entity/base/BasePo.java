@@ -12,6 +12,8 @@ import java.util.Date;
 @Data
 public class BasePo implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * 创建人
      */
