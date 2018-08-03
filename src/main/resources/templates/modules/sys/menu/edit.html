@@ -103,11 +103,10 @@
                                 </div>
                             </div>
                             <div class="layui-inline">
-                                <input value="${sysMenuPo.treeSort}" />
                                 <label class="layui-form-label">排序</label>
                                 <div class="layui-input-inline">
                                     <input type="text" name="treeSort" lay-verify="number" autocomplete="off" placeholder="排序"
-                                           class="layui-input" value="${sysMenuPo.treeSort}">
+                                           class="layui-input" value="${sysMenuPo.treeSort?string.number}">
                                 </div>
                             </div>
                         </div>

@@ -91,9 +91,8 @@ layui.config({
     index: 'lib/index' //主入口模块
 }).use(['element', 'layer', 'form', 'upload', 'treeGrid'], function () {
     var $ = layui.$,
-        treeGrid = layui.treeGrid,
-        element = layui.element;
-    var treeTable = treeGrid.render({
+        treeGrid = layui.treeGrid;
+    treeGrid.render({
         elem: '#' + MENU.ID,
         url: MENU.LIST_URL,
         type: 'get',
@@ -131,6 +130,17 @@ layui.config({
         } else if(layEvent == 'edit_menu'){
             MENU.addOrEditMenu(data.menuCode, true);
         }
+    });
+
+    var active = {
+        addMenu: function(){ //获取选中数据
+            MENU.addOrEditMenu("0", false);
+        }
+    };
+
+    $('.menu-table-reload-btn .layui-btn').on('click', function(){
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
     });
 
 });
