@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/sys/user")
 public class SysUserController {
 
-    final static String LIST_PAGE = "system/user/list";
+    final static String LIST_PAGE = "sys/user/list";
 
     /**
      * 加载列表页
