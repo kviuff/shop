@@ -9,8 +9,8 @@
         <result column="password" property="password"/>
         <result column="email" property="email"/>
         <result column="mobile" property="mobile"/>
-        <result column="last_login_ip" property="mobile"/>
-        <result column="last_login_date" property="mobile"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="last_login_date" property="lastLoginDate"/>
         <result column="status" property="status"/>
         <result column="create_by" property="createBy"/>
         <result column="create_date" property="createDate"/>
@@ -19,5 +19,36 @@
         <result column="remarks" property="remarks"/>
         <result column="user_type" property="userType"/>
     </resultMap>
+
+    <sql id="wherestatement">
+        WHERE is_del = 0
+
+        <if test="loginCode != null and loginCode != '' ">
+            AND login_code
+            LIKE CONCAT('%',#{loginCode},'%')
+        </if>
+        <if test="userName != null and userName != '' ">
+            AND user_name
+            LIKE CONCAT('%',#{userName},'%')
+        </if>
+        <if test="email != null and email != '' ">
+            AND email
+            LIKE CONCAT('%',#{email},'%')
+        </if>
+        <if test="mobile != null and mobile != '' ">
+            AND mobile
+            LIKE CONCAT('%',#{mobile},'%')
+        </if>
+        <if test="userType != null and userType != '' ">
+            AND user_type = #{userType}
+        </if>
+    </sql>
+
+    <select id="selectSysUserByCondition" resultMap="BaseResultMap" >
+        select * from sys_user
+        <include refid="wherestatement" />
+        order by create_date desc
+    </select>
+
 
 </mapper>

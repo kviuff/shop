@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 2018/07/20
  */
 @Controller
-@RequestMapping("menu")
-public class MenuController {
+@RequestMapping("/sys/menu")
+public class SysMenuController {
 
     final static String LIST_PAGE = "/modules/sys/menu/list";
     final static String ADD_PAGE = "/modules/sys/menu/add";

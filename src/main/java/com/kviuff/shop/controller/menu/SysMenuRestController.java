@@ -1,19 +1,15 @@
 package com.kviuff.shop.controller.menu;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.kviuff.shop.common.entity.SysMenuJsonPo;
-import com.kviuff.shop.common.utils.R;
 import com.kviuff.shop.common.entity.SysMenuPo;
+import com.kviuff.shop.common.utils.R;
 import com.kviuff.shop.service.menu.MenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 菜单接口-restful
@@ -22,8 +18,8 @@ import java.util.Map;
  * @date 2018/07/20
  */
 @RestController
-@RequestMapping("/sys/menu")
-public class MenuRestController {
+@RequestMapping("/rest/sys/menu")
+public class SysMenuRestController {
 
     /**
      * 注入接口

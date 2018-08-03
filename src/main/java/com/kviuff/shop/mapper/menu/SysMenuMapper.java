@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2018/07/23
  */
 @Repository
-public interface MenuMapper extends BaseMapper<SysMenuPo> {
+public interface SysMenuMapper extends BaseMapper<SysMenuPo> {
 
     /**
      * 根据条件查询菜单列表
