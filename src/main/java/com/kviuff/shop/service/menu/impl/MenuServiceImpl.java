@@ -2,7 +2,7 @@ package com.kviuff.shop.service.menu.impl;
 
 import com.kviuff.shop.common.utils.IdGen;
 import com.kviuff.shop.common.entity.SysMenuPo;
-import com.kviuff.shop.mapper.menu.MenuMapper;
+import com.kviuff.shop.mapper.menu.SysMenuMapper;
 import com.kviuff.shop.service.menu.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
-    private MenuMapper menuMapper;
+    private SysMenuMapper sysMenuMapper;
 
     /**
      * 保存菜单
@@ -29,7 +29,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void saveMenu(SysMenuPo sysMenuPo) {
         sysMenuPo.setMenuCode(IdGen.uuid());
-        menuMapper.insert(sysMenuPo);
+        sysMenuMapper.insert(sysMenuPo);
     }
 
     /**
@@ -38,7 +38,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public void deleteMenu(String menuCode) {
-        menuMapper.deleteByPrimaryKey(menuCode);
+        sysMenuMapper.deleteByPrimaryKey(menuCode);
     }
 
     /**
@@ -47,7 +47,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public void updateMenuByMenuCode(SysMenuPo sysMenuPo) {
-        menuMapper.updateByPrimaryKey(sysMenuPo);
+        sysMenuMapper.updateByPrimaryKey(sysMenuPo);
     }
 
     /**
@@ -57,7 +57,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public SysMenuPo getMenuByCode(String menuCode) {
-        return menuMapper.selectByPrimaryKey(menuCode);
+        return sysMenuMapper.selectByPrimaryKey(menuCode);
     }
 
     /**
@@ -66,7 +66,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public List<SysMenuPo> getMenuList() {
-        return menuMapper.selectAll();
+        return sysMenuMapper.selectAll();
     }
 
     /**
@@ -76,6 +76,6 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public List<SysMenuPo> getMenuListByParams(SysMenuPo sysMenuPo) {
-        return menuMapper.getMenuListByParams(sysMenuPo);
+        return sysMenuMapper.getMenuListByParams(sysMenuPo);
     }
 }

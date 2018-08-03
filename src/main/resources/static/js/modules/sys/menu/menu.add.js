@@ -1,7 +1,7 @@
 var MENU = {
     TREE_ELEMENT: "parentCode",
-    ADD_URL: "/sys/menu/save",
-    LIST_JSON_URL: "/sys/menu/json"
+    ADD_URL: "/rest/sys/menu/save",
+    LIST_JSON_URL: "/rest/sys/menu/json"
 };
 
 layui.config({

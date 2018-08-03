@@ -1,13 +1,13 @@
 /**
- * 定交常量
+ * 定义常量
  * @type {{ID: string, LIST_URL: string, TYPE: {"1": string, "2": string}, IS_SHOW: {"1": string, "0": string}}}
  */
 var MENU = {
     ID: 'menuTreeTable',
-    LIST_URL: "/sys/menu/list",
-    DEL_URL: "/sys/menu/delete",
-    ADD_PAGE_URL: "/menu/add/",
-    EDIT_PAGE_URL: "/menu/edit/",
+    LIST_URL: "/rest/sys/menu/list",
+    DEL_URL: "/rest/sys/menu/delete",
+    ADD_PAGE_URL: "/sys/menu/add/",
+    EDIT_PAGE_URL: "/sys/menu/edit/",
     TYPE: {'1':'菜单', '2':'权限'},
     IS_SHOW: {'1':'显示', '0':'隐藏'}
 };
