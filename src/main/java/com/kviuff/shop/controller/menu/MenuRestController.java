@@ -75,7 +75,7 @@ public class MenuRestController {
     public R updateMenu(@RequestBody SysMenuPo sysMenuPo) {
         initMenu(sysMenuPo);
         menuService.updateMenuByMenuCode(sysMenuPo);
-        return R.ok();
+        return R.ok("修改成功");
     }
 
     /**
