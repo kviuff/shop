@@ -1,7 +1,9 @@
 package com.kviuff.shop;
 
+import com.kviuff.shop.common.bootstrap.SpringContextUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication(scanBasePackages = {"com.kviuff.shop"})
@@ -9,6 +11,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class ShopKviuffApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ShopKviuffApplication.class, args);
+        ApplicationContext applicationContext = SpringApplication.run(ShopKviuffApplication.class, args);
+        SpringContextUtil.setApplicationContext(applicationContext);
     }
 }
