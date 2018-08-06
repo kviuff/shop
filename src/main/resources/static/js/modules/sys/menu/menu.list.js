@@ -3,7 +3,7 @@
  * @type {{ID: string, LIST_URL: string, TYPE: {"1": string, "2": string}, IS_SHOW: {"1": string, "0": string}}}
  */
 var MENU = {
-    ID: 'menuTreeTable',
+    ID: "menuTreeTable",
     LIST_URL: "/rest/sys/menu/list",
     DEL_URL: "/rest/sys/menu/delete",
     ADD_PAGE_URL: "/sys/menu/add/",

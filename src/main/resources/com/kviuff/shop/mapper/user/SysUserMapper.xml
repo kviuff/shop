@@ -21,7 +21,7 @@
     </resultMap>
 
     <sql id="wherestatement">
-        WHERE is_del = 0
+        WHERE 1 = 1
 
         <if test="loginCode != null and loginCode != '' ">
             AND login_code
