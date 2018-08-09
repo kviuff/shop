@@ -99,7 +99,7 @@ layui.config({
             {field: 'mobile', title: '手机'},
             {field: 'status', title: '状态', templet: '<div>{{USER.formatUserStatus(d.status)}}</div>'},
             {field: 'userType', title: '用户类型', templet: '<div>{{USER.formatUserType(d.userType)}}</div>'},
-            {field: '操作', title: '操作', toolbar: '#table-operate-toolbar'}
+            {field: '操作', width:70, title: '操作', toolbar: '#table-operate-toolbar'}
         ]],
         page: true
     });
@@ -113,7 +113,6 @@ layui.config({
                 layer.close(index);
                 //向服务端发送删除指令
                 USER.deleteUser(data.userCode);
-
                 table.reload(USER.TABLE_ELEMENT, {});
             });
         } else if(layEvent == 'edit_user'){

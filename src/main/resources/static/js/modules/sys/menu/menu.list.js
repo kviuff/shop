@@ -108,7 +108,7 @@ layui.config({
             {field: 'menuType', title: '类型', templet: '<div>{{MENU.formatMenuType(d.menuType)}}</div>'},
             {field: 'isShow', title: '可见', templet: '<div>{{MENU.formatMenuShow(d.isShow)}}</div>'},
             {field: 'permission', title: '权限标识'},
-            {field: '操作', title: '操作', toolbar: '#table-operate-toolbar'}
+            {field: '操作', width: 80, title: '操作', toolbar: '#table-operate-toolbar'}
         ]],
         page: false
     });
