@@ -18,6 +18,36 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                     <div class="user-table-reload-btn" style="margin-bottom: 10px;">
+                        <form class="layui-form layui-form-pane">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">登录账号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="loginCode" id="loginCode" autocomplete="off"
+                                           placeholder="登录账号" class="layui-input">
+                                </div>
+                                <label class="layui-form-label">用户姓名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="userName" id="userName" autocomplete="off"
+                                           placeholder="用户姓名" class="layui-input">
+                                </div>
+                                <label class="layui-form-label">邮箱</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="email" id="email" autocomplete="off"
+                                           placeholder="邮箱" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">手机</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="mobile" id="mobile" autocomplete="off"
+                                           placeholder="手机" class="layui-input">
+                                </div>
+                                <div class="layui-input-inline">
+                                    <button class="layui-btn" lay-submit="" lay-filter="search">立即查询</button>
+                                    <button type="reset"  class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
                         <button class="layui-btn" data-type="addUser">增加</button>
                     </div>
                     <table class="layui-hide" id="user-table-page" lay-filter="user-table-page"></table>

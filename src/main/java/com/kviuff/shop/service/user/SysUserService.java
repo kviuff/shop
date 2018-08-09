@@ -15,7 +15,7 @@ public interface SysUserService {
      * 保存用户信息
      * @param sysUserPo
      */
-    void saveUser (SysUserPo sysUserPo);
+    void insertUser (SysUserPo sysUserPo);
 
     /**
      * 删除用户信息

@@ -31,7 +31,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @param sysUserPo
      */
     @Override
-    public void saveUser(SysUserPo sysUserPo) {
+    public void insertUser(SysUserPo sysUserPo) {
         sysUserPo.setUserCode(IdGen.uuid());
         sysUserPo.setCreateDate(new Date());
         sysUserPo.setCreateBy("系统");

@@ -87,9 +87,9 @@ layui.config({
 }).extend({
     index: 'lib/index' //主入口模块
 }).use(['index', 'table'], function () {
-    var $ = layui.$, admin = layui.admin, table = layui.table, laypage = layui.laypage, element = layui.element;
+    var $ = layui.$, admin = layui.admin, table = layui.table, laypage = layui.laypage, form = layui.form;
 
-    table.render({
+    var userListTable = table.render({
         elem: '#' + USER.TABLE_ELEMENT,
         url: USER.DATA_LIST_URL,
         cols: [[
@@ -122,7 +122,7 @@ layui.config({
     });
 
     var active = {
-        addMenu: function(){
+        addUser: function(){
             USER.addOrEditUser("0", false);
         }
     };
@@ -130,6 +130,21 @@ layui.config({
     $('.user-table-reload-btn .layui-btn').on('click', function(){
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
+    });
+
+    form.on('submit(search)', function(data){
+        userListTable.reload({
+            where: {
+                loginCode: $("#loginCode").val(),
+                userName: $("#userName").val(),
+                email: $("#email").val(),
+                mobile: $("#mobile").val()
+            },
+            page: {
+                curr: 1
+            }
+        });
+        return false;
     });
 
 });

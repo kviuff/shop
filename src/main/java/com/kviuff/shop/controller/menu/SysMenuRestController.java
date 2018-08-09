@@ -60,7 +60,7 @@ public class SysMenuRestController {
     @RequestMapping("/save")
     public R saveMenu(@RequestBody SysMenuPo sysMenuPo) {
         initMenu(sysMenuPo);
-        menuService.saveMenu(sysMenuPo);
+        menuService.insertMenu(sysMenuPo);
         return R.ok("保存成功");
     }
 
@@ -146,7 +146,7 @@ public class SysMenuRestController {
     }
 
     /**
-     * 初始化菜单
+     * 初始化菜单信息
      * @param sysMenuPo
      */
     private void initMenu (SysMenuPo sysMenuPo) {

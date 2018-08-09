@@ -27,7 +27,7 @@ public class MenuServiceImpl implements MenuService {
      * @param sysMenuPo
      */
     @Override
-    public void saveMenu(SysMenuPo sysMenuPo) {
+    public void insertMenu(SysMenuPo sysMenuPo) {
         sysMenuPo.setMenuCode(IdGen.uuid());
         sysMenuMapper.insert(sysMenuPo);
     }

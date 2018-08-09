@@ -15,7 +15,7 @@ public interface MenuService {
      * 保存菜单
      * @param sysMenuPo
      */
-    void saveMenu (SysMenuPo sysMenuPo);
+    void insertMenu (SysMenuPo sysMenuPo);
 
     /**
      * 删除菜单
