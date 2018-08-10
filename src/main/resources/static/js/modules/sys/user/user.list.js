@@ -93,6 +93,7 @@ layui.config({
         elem: '#' + USER.TABLE_ELEMENT,
         url: USER.DATA_LIST_URL,
         cols: [[
+            {type:'numbers'},
             {field: 'loginCode', title: '登录账号'},
             {field: 'userName', title: '用户姓名'},
             {field: 'email', title: '邮箱'},

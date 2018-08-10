@@ -32,7 +32,7 @@ public class SysRolePo extends BasePo {
     private Integer roleSort;
 
     /**
-     * 是否系统内置
+     * 是否系统内置  1是 0否
      */
     private String isSys;
 

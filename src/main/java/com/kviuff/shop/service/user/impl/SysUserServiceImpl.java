@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,9 +32,6 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public void insertUser(SysUserPo sysUserPo) {
         sysUserPo.setUserCode(IdGen.uuid());
-        sysUserPo.setCreateDate(new Date());
-        sysUserPo.setCreateBy("系统");
-        sysUserPo.setStatus("0");
         sysUserMapper.insert(sysUserPo);
     }
 

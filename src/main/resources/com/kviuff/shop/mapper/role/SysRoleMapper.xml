@@ -3,15 +3,35 @@
 <mapper namespace="com.kviuff.shop.mapper.role.SysRoleMapper">
 
     <resultMap id="BaseResultMap" type="com.kviuff.shop.common.entity.SysRolePo">
-        <result column="role_code" property="userCode"/>
-        <result column="role_name" property="loginCode"/>
-        <result column="role_sort" property="userName"/>
-        <result column="is_sys" property="password"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_sort" property="roleSort"/>
+        <result column="is_sys" property="isSys"/>
         <result column="create_by" property="createBy"/>
         <result column="create_date" property="createDate"/>
         <result column="update_by" property="updateBy"/>
         <result column="update_date" property="updateDate"/>
         <result column="remarks" property="remarks"/>
     </resultMap>
+
+    <sql id="wherestatement">
+        WHERE 1 = 1
+
+        <if test="roleCode != null and roleCode != '' ">
+            AND role_code
+            LIKE CONCAT('%',#{roleCode},'%')
+        </if>
+        <if test="roleName != null and roleName != '' ">
+            AND role_name
+            LIKE CONCAT('%',#{roleName},'%')
+        </if>
+    </sql>
+
+
+    <select id="selectSysRoleByCondition" resultMap="BaseResultMap">
+        select * from sys_role
+        <include refid="wherestatement" />
+        order by create_date desc
+    </select>
 
 </mapper>

@@ -3,6 +3,7 @@ package com.kviuff.shop.controller.user;
 
 import com.github.pagehelper.PageInfo;
 import com.kviuff.shop.common.entity.SysUserPo;
+import com.kviuff.shop.common.utils.IdGen;
 import com.kviuff.shop.common.utils.R;
 import com.kviuff.shop.service.user.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +69,9 @@ public class SysUserRestController {
      */
     @RequestMapping("/save")
     public R saveMenu(@RequestBody SysUserPo sysUserPo) {
+        sysUserPo.setCreateDate(new Date());
+        sysUserPo.setCreateBy("系统");
+        sysUserPo.setStatus("0");
         sysUserService.insertUser(sysUserPo);
         return R.ok("保存成功");
     }
