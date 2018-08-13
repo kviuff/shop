@@ -9,11 +9,13 @@ var ROLE = {
     EDIT_PAGE_URL: "/sys/role/edit/",
     DATA_LIST_URL: "/rest/sys/role/list",
     DATA_DELETE_URL: "/rest/sys/role/delete/",
+    ROLE_SETTING_URL: "/sys/role/rolemenu/",
     ADD_EDIT_TITLE: {'0':'编辑角色', '1':'新增角色'},
     ADD_EDIT_TIP: "点击此处返回角色列表",
     IS_SYS: {'1':'是', '0':'否'},
     OPERATE_TOOLBAR_ELEMENT: '#table-operate-toolbar',
     DELETE_CONFIRM_TITLE: '确认删除角色？',
+    ROLE_SETTING_TITLE: '配置角色',
     RELOAD_BTN_ELEMENT: '.table-reload-btn .layui-btn'
 };
 
@@ -78,6 +80,32 @@ ROLE.formatIsSys = function (value) {
     return ROLE.IS_SYS[value];
 };
 
+/**
+ * 配置角色权限
+ * @param thisCode  主键code
+ */
+ROLE.roleSetting = function (thisCode){
+    var $ = layui.$;
+    var index = layui.layer.open({
+        title : ROLE.ROLE_SETTING_TITLE,
+        type : 2,
+        content : ROLE.ROLE_SETTING_URL + thisCode,
+        success : function(layero, index){
+            setTimeout(function(){
+                layui.layer.tips(ROLE.ADD_EDIT_TIP, '.layui-layer-setwin .layui-layer-close', {
+                    tips: 3
+                });
+            },500);
+        }
+    })
+    layui.layer.full(index);
+    //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+    $(window).on("resize",function(){
+        layui.layer.full(index);
+    })
+};
+
+
 layui.config({
     base: '/static/' //静态资源所在路径
 }).extend({
@@ -93,7 +121,7 @@ layui.config({
             {field: 'roleName', title: '角色名称'},
             {field: 'roleSort', title: '排序'},
             {field: 'isSys', title: '系统内置', templet: '<div>{{ROLE.formatIsSys(d.isSys)}}</div>'},
-            {field: '操作', width:70, title: '操作', toolbar: ROLE.OPERATE_TOOLBAR_ELEMENT}
+            {field: '操作', width:100, title: '操作', toolbar: ROLE.OPERATE_TOOLBAR_ELEMENT}
         ]],
         page: true
     });
@@ -111,6 +139,8 @@ layui.config({
             });
         } else if(layEvent == 'edit'){
             ROLE.addOrEdit(data.roleCode, true);
+        } else if (layEvent == 'setting') {
+            ROLE.roleSetting(data.roleCode);
         }
     });
 

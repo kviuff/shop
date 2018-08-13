@@ -22,6 +22,7 @@ public class SysRoleController {
     final static String LIST_PAGE = "/modules/sys/role/list";
     final static String ADD_PAGE = "/modules/sys/role/add";
     final static String EDIT_PAGE = "/modules/sys/role/edit";
+    final static String ROLE_MENU_PAGE = "/modules/sys/rolemenu/rolemenu";
 
     @Autowired
     private SysRoleService sysRoleService;
@@ -55,6 +56,17 @@ public class SysRoleController {
         ModelAndView mv = new ModelAndView(EDIT_PAGE);
         SysRolePo sysRolePo = sysRoleService.selectRole(roleCode);
         mv.addObject("sysRolePo", sysRolePo);
+        return mv;
+    }
+
+    /**
+     * 加载角色权限配置页
+     * @return
+     */
+    @RequestMapping("rolemenu/{roleCode}")
+    public ModelAndView rolemenu(@PathVariable String roleCode) {
+        ModelAndView mv = new ModelAndView(ROLE_MENU_PAGE);
+        mv.addObject("roleCode", roleCode);
         return mv;
     }
 

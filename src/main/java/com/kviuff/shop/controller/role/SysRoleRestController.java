@@ -1,20 +1,16 @@
 package com.kviuff.shop.controller.role;
 
 import com.github.pagehelper.PageInfo;
-import com.kviuff.shop.common.entity.SysRolePo;
-import com.kviuff.shop.common.entity.SysUserPo;
+import com.kviuff.shop.common.entity.*;
 import com.kviuff.shop.common.utils.R;
+import com.kviuff.shop.service.menu.MenuService;
+import com.kviuff.shop.service.role.SysRoleMenuService;
 import com.kviuff.shop.service.role.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 角色接口-restful
@@ -28,6 +24,12 @@ public class SysRoleRestController {
 
     @Autowired
     private SysRoleService sysRoleService;
+
+    @Autowired
+    private SysRoleMenuService sysRoleMenuService;
+
+    @Autowired
+    private MenuService menuService;
 
     /**
      * 获取角色分页数据
@@ -109,5 +111,100 @@ public class SysRoleRestController {
         }
     }
 
+    /**
+     * 保存角色权限
+     *
+     * @param sysRoleMenuPo
+     */
+    @RequestMapping("/saveRoleMenu")
+    public R saveRoleMenu(@RequestBody SysRoleMenuPo sysRoleMenuPo) {
+        try {
+
+            // 将以,分隔的菜单编码转换成数组
+            String[] menuCodes = sysRoleMenuPo.getMenuCode().split(",");
+            // 获取角色编码
+            String roleCode = sysRoleMenuPo.getRoleCode();
+            // 删除该角色编码的所有配置
+            SysRoleMenuPo sysRoleMenuPo2 = new SysRoleMenuPo();
+            sysRoleMenuPo2.setRoleCode(roleCode);
+            sysRoleMenuService.deleteByExample(sysRoleMenuPo2);
+            // 处理菜单编码的数组，将数据放入list，批量插入数据库
+            List<SysRoleMenuPo> sysRoleMenuPoList = new ArrayList<>();
+            for (String menuCode: menuCodes) {
+                SysRoleMenuPo sysRoleMenuPo1 = new SysRoleMenuPo();
+                sysRoleMenuPo1.setRoleCode(roleCode);
+                sysRoleMenuPo1.setMenuCode(menuCode);
+                sysRoleMenuPoList.add(sysRoleMenuPo1);
+            }
+            sysRoleMenuService.insertBatch(sysRoleMenuPoList);
+            return R.ok("保存成功");
+        } catch (Exception e) {
+            e.getMessage();
+            return R.error("保存角色权限出错");
+        }
+    }
+
+    /**
+     * 获取所有菜单的json数据
+     *
+     * @return
+     */
+    @RequestMapping(value = "/json/{roleCode}", method = RequestMethod.GET)
+    public List<SysMenuJsonPo> getMenuJson(@PathVariable("roleCode") String roleCode) {
+
+        SysRoleMenuPo sysRoleMenuPo = new SysRoleMenuPo();
+        sysRoleMenuPo.setRoleCode(roleCode);
+        List<SysRoleMenuPo> sysRoleMenuPoList = sysRoleMenuService.selectByExample(sysRoleMenuPo);
+
+        List<SysMenuPo> sysMenuPoList = menuService.getMenuList();
+        List<SysMenuJsonPo> sysMenuJsonPoList = new ArrayList<>();
+        for (SysMenuPo sysMenuPo : sysMenuPoList) {
+            SysMenuJsonPo sysMenuJsonPo = new SysMenuJsonPo();
+            String menuCode = sysMenuPo.getMenuCode();
+            sysMenuJsonPo.setId(menuCode);
+            sysMenuJsonPo.setName(sysMenuPo.getMenuName());
+            sysMenuJsonPo.setParentCode(sysMenuPo.getParentCode());
+            sysMenuJsonPo.setHref(sysMenuPo.getMenuHref());
+
+            for (SysRoleMenuPo sysRoleMenuPo1 : sysRoleMenuPoList) {
+                if (menuCode.equals(sysRoleMenuPo1.getMenuCode())) {
+                    sysMenuJsonPo.setChecked("true");
+                    break;
+                }
+            }
+
+            sysMenuJsonPoList.add(sysMenuJsonPo);
+        }
+
+        List<SysMenuJsonPo> newList = new ArrayList<SysMenuJsonPo>();
+        for (SysMenuJsonPo sysMenuJsonPo : sysMenuJsonPoList) {
+            if (sysMenuJsonPo.getParentCode().compareTo("0") == 0) { // 一级菜单
+                List<SysMenuJsonPo> childrenList = getChildMenuList(sysMenuJsonPo.getId(), sysMenuJsonPoList);
+                sysMenuJsonPo.setChildren(childrenList);
+                sysMenuJsonPo.setSpread(true);
+                newList.add(sysMenuJsonPo);
+            }
+        }
+
+        return newList;
+    }
+
+    /**
+     * 获取一级菜单的子菜单
+     *
+     * @param parentCode 父id
+     * @param menulist   菜单列表
+     * @return
+     */
+    private List<SysMenuJsonPo> getChildMenuList(String parentCode, List<SysMenuJsonPo> menulist) {
+        List<SysMenuJsonPo> childList = new ArrayList<SysMenuJsonPo>();
+        for (SysMenuJsonPo sysMenuJsonPo : menulist) {
+            if (sysMenuJsonPo.getParentCode().compareTo(parentCode) == 0) {
+                sysMenuJsonPo.setChildren(this.getChildMenuList(sysMenuJsonPo.getId(), menulist));
+                childList.add(sysMenuJsonPo);
+            }
+        }
+        return childList;
+    }
 
 }

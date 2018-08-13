@@ -42,6 +42,11 @@ public class SysMenuJsonPo{
     private Boolean spread;
 
     /**
+     * 是否选中
+     */
+    private String checked;
+
+    /**
      *
      */
     private List<SysMenuJsonPo> children;
