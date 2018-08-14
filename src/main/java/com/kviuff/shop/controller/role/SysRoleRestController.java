@@ -49,6 +49,8 @@ public class SysRoleRestController {
             SysRolePo sysRolePo = new SysRolePo();
             sysRolePo.setRoleCode(roleCode);
             sysRolePo.setRoleName(roleName);
+            sysRolePo.setPageNo(Integer.parseInt(pageNo));
+            sysRolePo.setPageSize(pageSize);
             PageInfo<SysRolePo> sysRolePoPageInfo = sysRoleService.findPageList(sysRolePo);
             Map<String, Object> map = new HashMap<>();
             map.put("count", sysRolePoPageInfo.getTotal());

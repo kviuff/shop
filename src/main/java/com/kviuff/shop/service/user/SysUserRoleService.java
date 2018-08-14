@@ -23,4 +23,11 @@ public interface SysUserRoleService {
      * @param sysUserRolePo
      */
     void deleteByExample (SysUserRolePo sysUserRolePo);
+
+    /**
+     * 根据用户编码查询用户下的权限
+     * @param sysUserRolePo
+     * @return
+     */
+    List<SysUserRolePo> selectByExample (SysUserRolePo sysUserRolePo);
 }

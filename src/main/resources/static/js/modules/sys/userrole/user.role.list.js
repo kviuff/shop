@@ -1,7 +1,7 @@
 var ROLE = {
     TABLE_ELEMENT: "table-page",
     PAGE_ELEMENT: "laypage",
-    DATA_LIST_URL: "/rest/sys/role/list",
+    DATA_LIST_URL: "/rest/sys/user/role/list",
     // 步长
     LIMIT_COUNT: 1,
     // 当前页
@@ -30,7 +30,7 @@ layui.config({
 
     table.render({
         elem: '#' + ROLE.TABLE_ELEMENT,
-        url: ROLE.DATA_LIST_URL,
+        url: ROLE.DATA_LIST_URL + "?userCode=" + userCode,
         cols: [[
             {type:'checkbox', fixed: 'left'},
             {field: 'roleName', title: '角色名称'},

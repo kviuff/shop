@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 系统角色
@@ -40,4 +41,11 @@ public class SysRolePo extends BasePo {
      * 备注
      */
     private String remarks;
+
+    @Transient
+    private String layChecked;
+
+    public String getLayChecked() {
+        return this.layChecked;
+    }
 }

@@ -42,4 +42,19 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
         criteria.andEqualTo("userCode", sysUserRolePo.getUserCode());
         sysUserRoleMapper.deleteByExample(example);
     }
+
+    /**
+     * 根据用户编码查询用户下的权限
+     * @param sysUserRolePo
+     * @return
+     */
+    @Override
+    public List<SysUserRolePo> selectByExample(SysUserRolePo sysUserRolePo) {
+        Example example = new Example(SysUserRolePo.class);
+        Example.Criteria criteria = example.createCriteria();
+        System.out.println(sysUserRolePo.getUserCode() + "=====");
+        criteria.andEqualTo("userCode", sysUserRolePo.getUserCode());
+        List<SysUserRolePo> sysUserRolePoList = sysUserRoleMapper.selectByExample(example);
+        return sysUserRolePoList;
+    }
 }
