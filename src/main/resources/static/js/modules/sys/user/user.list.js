@@ -82,6 +82,31 @@ USER.deleteUser = function (userCode) {
     });
 };
 
+/**
+ * 角色配置
+ * @param userCode
+ */
+USER.configRole = function (userCode) {
+    var $ = layui.$;
+    var index = layui.layer.open({
+        title : "角色分配",
+        type : 2,
+        content : "/sys/user/role/list/" + userCode,
+        success : function(layero, index){
+            setTimeout(function(){
+                layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
+                    tips: 3
+                });
+            },500);
+        }
+    })
+    layui.layer.full(index);
+    //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+    $(window).on("resize",function(){
+        layui.layer.full(index);
+    })
+};
+
 layui.config({
     base: '/static/' //静态资源所在路径
 }).extend({
@@ -100,7 +125,7 @@ layui.config({
             {field: 'mobile', title: '手机'},
             {field: 'status', title: '状态', templet: '<div>{{USER.formatUserStatus(d.status)}}</div>'},
             {field: 'userType', title: '用户类型', templet: '<div>{{USER.formatUserType(d.userType)}}</div>'},
-            {field: '操作', width:70, title: '操作', toolbar: '#table-operate-toolbar'}
+            {field: '操作', width:100, title: '操作', toolbar: '#table-operate-toolbar'}
         ]],
         page: true
     });
@@ -118,6 +143,8 @@ layui.config({
             });
         } else if(layEvent == 'edit_user'){
             USER.addOrEditUser(data.userCode, true);
+        } else if (layEvent == 'setting') {
+            USER.configRole(data.userCode);
         }
     });
 

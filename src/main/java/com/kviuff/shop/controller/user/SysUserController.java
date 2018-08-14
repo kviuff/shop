@@ -21,6 +21,7 @@ public class SysUserController {
     final static String LIST_PAGE = "/modules/sys/user/list";
     final static String ADD_PAGE = "/modules/sys/user/add";
     final static String EDIT_PAGE = "/modules/sys/user/edit";
+    final static String USER_ROLE_PAGE = "/modules/sys/userrole/list";
 
     @Autowired
     private SysUserService sysUserService;
@@ -54,6 +55,17 @@ public class SysUserController {
         ModelAndView mv = new ModelAndView(EDIT_PAGE);
         SysUserPo sysUserPo = sysUserService.getUser(userCode);
         mv.addObject("sysUserPo", sysUserPo);
+        return mv;
+    }
+
+    /**
+     * 加载用户角色列表页
+     * @return
+     */
+    @RequestMapping("role/list/{userCode}")
+    public ModelAndView userRole(@PathVariable String userCode) {
+        ModelAndView mv = new ModelAndView(USER_ROLE_PAGE);
+        mv.addObject("userCode", userCode);
         return mv;
     }
 }
