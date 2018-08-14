@@ -52,7 +52,6 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
     public List<SysUserRolePo> selectByExample(SysUserRolePo sysUserRolePo) {
         Example example = new Example(SysUserRolePo.class);
         Example.Criteria criteria = example.createCriteria();
-        System.out.println(sysUserRolePo.getUserCode() + "=====");
         criteria.andEqualTo("userCode", sysUserRolePo.getUserCode());
         List<SysUserRolePo> sysUserRolePoList = sysUserRoleMapper.selectByExample(example);
         return sysUserRolePoList;
