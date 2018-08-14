@@ -3,6 +3,8 @@ package com.kviuff.shop.controller;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.kviuff.shop.common.CommonConstants;
 import com.kviuff.shop.common.utils.RandomValidateCodeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+
+    private final static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     final static String PAGE_LOGIN = "/login";
 
